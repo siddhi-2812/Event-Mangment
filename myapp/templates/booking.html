@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <title>Haldi Ceremony</title>
+  </head>
+
+  <script>
+    function validateForm() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var phone = document.getElementById('phone').value;
+
+    // Regular expression for email validation
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Regular expression for phone number validation
+    var phoneRegex = /^\d{10}$/;
+
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    if (!phoneRegex.test(phone)) {
+        alert("Please enter a valid phone number (10 digits).");
+        return false;
+    }
+
+    // Password validation
+    
+
+    return true;
+}
+</script>
+
+  <style>
+    
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.71); /* Change the background color as needed */
+      position: relative;
+      padding: 16.8px 14px;
+    }
+
+    .nav-item {
+      color: #fff;
+      font-size: 1em;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 15px;
+    }
+
+    .navbar-nav .nav-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar-nav .nav-item::before,
+    .navbar-nav .nav-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      transition: width 0.3s ease;
+      background-color: rgb(255, 18, 128); /* Initial background color of the pseudo-elements */
+      z-index: -1;
+    }
+
+    .navbar-nav .nav-item::before {
+      left: 0;
+    }
+
+    .navbar-nav .nav-item::after {
+      right: 0;
+    }
+
+    .navbar-nav .nav-item:hover::before,
+    .navbar-nav .nav-item:hover::after {
+      width: 50%; /* Change the width to control the left-to-right color movement */
+    }
+
+    .navbar-brand {
+      color: #fff; /* Change the color of the logo/text */
+    }
+
+    .navbar-brand:hover {
+      color: #ecf0f1; /* Change the hover color of the logo/text */
+    }
+
+    .navbar-nav .nav-item .nav-link {
+      color: #fff; /* Change the color of the menu items */
+    }
+
+    .navbar-nav .nav-item .nav-link:hover {
+      color: #ecf0f1; /* Change the hover color of the menu items */
+    }
+    #Haldi-ceremony {
+      background-color: #ffffff;
+      padding: 50px 0;
+    }
+
+    #Haldi-ceremony h2 {
+      color: #343a40;
+    }
+
+    #Haldi-ceremony p {
+      color: #6c757d;
+    }
+
+    #pricing {
+      padding: 50px 0;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      transition: all ease-in-out;
+      background-color: #333;
+      color: white;
+    }
+
+    .card:hover .card-text {
+      color: white;
+      /* Changing card text color to white on hover */
+    }
+
+    .card-title:hover,
+    .card:hover .card-title {
+      color: white;
+      /* Changing card title color to white on hover */
+    }
+
+    .card-title {
+      color: #343a40;
+      font-weight: bold;
+    }
+
+    .card-title:hover {
+      color: white;
+    }
+
+    .card-text {
+      color: #6c757d;
+    }
+
+    #booking-form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #booking-form h3 {
+      color: #343a40;
+    }
+
+    .form-group label {
+      color: #6c757d;
+    }
+  </style>
+
+  
+
+  <body>
+  {% if messages %}
+            {% for msg in messages %}
+              <script>
+                alert("{{msg}}")
+              </script>
+            {% endfor %}
+  {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" style="font-size: 32.4px;font-weight:600;color:rgb(255,18,128);letter-spacing: 5px;" href="#">Event</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about">ABOUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="events">EVENTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="booking">Booking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact">CONTACT</a>
+            </li>
+              {% if request.session.useremail %}
+                <li><a class="nav-link" href="logout">logout</a></li>
+                <li><a class="nav-link" href="editprofile">Edit Profile</a></li>
+              {% else %}
+                <li><a class="nav-link" href="login">Login</a></li>
+                <li><a class="nav-link" href="register">Register</a></li>
+              {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <section id="booking-form" class="mt-5 mb-5">
+        <div class="container">
+          <h3 class="text-center mb-4 text-danger">Book Your  Event</h3>
+
+          <form action="booking_insert" onsubmit="return validateForm()" method="post">{% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputFirstName">First Name</label>
+                    <input type="text" name="FirstName" class="form-control" id="inputFirstName" placeholder="Your First Name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputLastName">Last Name</label>
+                    <input type="text" name="LastName" class="form-control" id="inputLastName" placeholder="Your Last Name" required>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Phone</label>
+                <input type="text" name="Phone" id="phone" title="Please enter a 10-digit phone number" class="form-control" placeholder="1234567890" required>
+            </div>
+                <div class="form-group col-md-6">
+                    <label>Email</label>
+                    <input type="email" name="Email" class="form-control" id="email" placeholder="example@gmail.com" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Category</label>
+                    <select name="Category" class="form-control" id="slt1" required>
+                      <option value="wedding" id="wedding">Wedding</option>
+                      <option value="Birthday" id="birthday">Birthday</option>
+                      <option value="Collage" id="college">Collage</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Sub-Category</label>
+                    <select name="Sub_Category" id="slt2" class="form-control" required>
+                      <option value="wedding">Sangeet</option>
+                      <option value="wedding">Mehndi</option>
+                      <option value="wedding">Haldi</option>
+                      <option value="wedding">Reception</option>
+                      <option value="wedding">Marraige</option>
+                      <option value="Birthday">Theme Decoration</option>
+                      <option value="Collage">Graduation Ceremony</option>
+                      <option value="Collage">Festival Party</option>
+                      <option value="Collage">Fresher Party</option>
+                      <option value="Collage">Annual Functions</option>
+                    
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Location of the Event</label>
+                    <input type="text" name="Location" class="form-control" id="inputAddress" placeholder="Event Location" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputDate">Date Of Event</label>
+                    <input type="date" name="Date" class="form-control" id="inputDate" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Package</label>
+                    <select name="Package" class="form-control" required>
+                        <option value="Genral">Genral 1</option>
+                        <option value="Genral">Genral 2</option>
+                        <option value="Semi-Deluxe">Semi-Deluxe 1</option>
+                        <option value="Semi-Deluxe">Semi-Deluxe 2</option>
+                        <option value="Deluxe">Deluxe 1</option>
+                        <option value="Deluxe">Deluxe 2</option>
+                        
+                    </select>
+                </div>
+            </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputEventDetails">Time Of Event</label>
+                    <input type="text" name="time" class="form-control" placeholder="Provide details about your event time" required></input>
+                </div>
+              </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputEventDetails">Event Details</label>
+                    <textarea name="Details" class="form-control" id="inputEventDetails" rows="4" placeholder="Provide details about your event" required></textarea>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-danger">
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    
+
+    <script>
+      $('.carousel').carousel({
+        interval: 2000
+      })
+
+      ///Category - Sub category
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const slt1 = document.getElementById('slt1');
+      const slt2 = document.getElementById('slt2');
+
+      slt1.addEventListener('change', function () {
+        const selectedCategory = slt1.value;
+
+        slt2.innerHTML = '';
+
+        switch (selectedCategory) {
+          case 'wedding':
+            addOption(slt2, 'Sangeet', 'Sangeet');
+            addOption(slt2, 'Mehndi', 'Mehndi');
+            addOption(slt2, 'Haldi', 'Haldi');
+            addOption(slt2, 'Reception', 'Reception');
+            addOption(slt2, 'Marraige', 'Marraige');
+            break;
+          case 'Birthday':
+            addOption(slt2, 'Theme Decoration', 'Theme Decoration');
+            break;
+          case 'Collage':
+            addOption(slt2, 'Graduation Ceremony', 'Graduation Ceremony');
+            addOption(slt2, 'Festival Party', 'Festival Party');
+            addOption(slt2, 'Fresher Party', 'Fresher Party');
+            addOption(slt2, 'Annual Functions', 'Annual Functions');
+            break;
+          default:
+
+            addOption(slt2, 'Select Sub-Category', '');
+        }
+      });
+
+      function addOption(selectElement, text, value) {
+        const option = document.createElement('option');
+        option.text = text;
+        option.value = value;
+        selectElement.add(option);
+      }
+    });
+
+
+////////date
+
+    var today = new Date().toISOString().split('T')[0];
+
+    document.getElementById("inputDate").setAttribute("min", today);
+
+
+
+
+
+    </script>
+  </body>
+</html>

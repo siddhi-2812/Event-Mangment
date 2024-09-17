@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Credit Card Payment Form Template | PrepBootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="static/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="static/css/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="static/css/font-awesome.css" rel="stylesheet">		<!-- font-awesome icons -->
+<!-- //Custom Theme files -->
+<!-- js -->
+<script src="static/js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!-- web-fonts -->
+<link href="//fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/font-awesome/css/font-awesome.min.css" />
+
+    <script type="text/javascript" src="static/bootstrap/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		function validateForm() {
+			var cardNumber = document.getElementsByName('Number')[0].value;
+			var cvv = document.getElementsByName('cvv')[0].value;
+	
+			// Regular expression for credit card number validation
+			var cardNumberRegex = /^\d{16}$/;
+			// Regular expression for CVV validation
+			var cvvRegex = /^\d{3}$/;
+	
+			if (!cardNumberRegex.test(cardNumber)) {
+				alert("Please enter a valid 16-digit credit card number.");
+				return false;
+			}
+	
+			if (!cvvRegex.test(cvv)) {
+				alert("Please enter a valid 3-digit CVV.");
+				return false;
+			}
+	
+			return true;
+		}
+	</script>
+	
+    <style>
+	.testimonials {
+		background-color: #f8f8f8;
+		padding: 50px 0;
+	}
+
+	.testimonial-box {
+		background-color: #fff;
+		border: 1px solid #ddd;
+		padding: 20px;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+	.testimonial-box p {
+		font-size: 16px;
+		color: #555;
+		margin-bottom: 20px;
+	}
+
+	.testimonial-box h4 {
+		font-size: 18px;
+		color: #333;
+		margin-bottom: 10px;
+	}
+
+	.testimonial-box span {
+		font-size: 14px;
+		color: #777;
+		display: block;
+	}
+</style>
+
+
+</head>
+<body>
+
+<div class="container">
+    {% if messages %}
+            {% for msg in messages %}
+              <script>
+                alert("{{msg}}")
+              </script>
+            {% endfor %}
+    {% endif %}
+
+        <div class="header-w3layouts">
+			<!-- Navigation -->
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header page-scroll">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+							<span class="sr-only">Events</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<h1><a class="navbar-brand" href="index.html">Events</a></h1>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-ex1-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+							<li class="hidden"><a class="page-scroll" href="#page-top"></a>	</li>
+							<li><a class="hvr-sweep-to-right" href="/">Home</a></li>
+							<li><a class="hvr-sweep-to-right" href="about">About</a></li>
+							<li><a class="hvr-sweep-to-right" href="events">Events</a></li>
+							<li><a class="hvr-sweep-to-right" href="booking">Booking</a></li>
+							<li><a class="hvr-sweep-to-right" href="contact">Contact</a></li>
+							{% if request.session.useremail %}
+					           <li><a class="hvr-sweep-to-right" href="logout">logout</a></li>
+							   <li><a class="hvr-sweep-to-right" href="editprofile">Edit Profile</a></li>
+							{% else %}
+							  <li><a class="hvr-sweep-to-right" href="login">Login</a></li>
+							  <li><a class="hvr-sweep-to-right" href="register">Register</a></li>
+							{% endif %}
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container -->
+			</nav>
+		</div>
+
+<!-- Credit Card Payment Form - START -->
+
+<div class="container" style="margin-top:200px;">
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <h3 class="text-center">Payment Details</h3>
+                        <img class="img-responsive cc-img" src="https://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                    </div>
+                </div>
+                <form role="form" action="/paymentinsert" method="post" onsubmit="return validateForm()">{% csrf_token %}
+                <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>CARD NUMBER</label>
+                                    <div class="input-group">
+                                        <input type="hidden" name="bid" value="{{ bookingdata.id }}">
+                                        <input type="tel" id="Number" name="Number" class="form-control" placeholder="Valid Card Number" required/>
+                                        <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                    <input type="tel" name="date" class="form-control" placeholder="MM / YY" required/>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 col-md-5 pull-right">
+                                <div class="form-group">
+                                    <label>CV CODE</label>
+                                    <input type="tel" name="cvv" id="cvv" class="form-control" placeholder="CVC" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>CARD OWNER</label>
+                                    <input type="text" name="Name" class="form-control" placeholder="Card Owner Names" required />
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-warning btn-lg btn-block">Process payment</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .cc-img {
+        margin: 0 auto;
+    }
+</style>
+<!-- Credit Card Payment Form - END -->
+
+</div>
+
+<div class="footer-top">
+    <div class="container">
+        <div class="col-md-12 foot-left">
+            <h3 class="text-center">Contact Us</h3>
+
+            <p class="text-center">
+                Feel free to reach out to us for any inquiries or assistance.
+            </p>
+            <!-- Add your contact information, address, or any other relevant details here -->
+            <p class="text-center">Phone: +91 (123) 456-7890 | Email: eventorg@example.com</p>
+        </div>
+    </div>
+</div>
+
+<!-- /footer-top -->
+
+
+
+<!-- //footer -->
+<!-- bootstrap-modal-pop-up -->
+	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					Events
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+					<div class="modal-body">
+						<img src="static/images/g8.jpg" alt=" " class="img-responsive" />
+						<p>Ut enim ad minima veniam, quis nostrum
+							exercitationem ullam corporis suscipit laboriosam,
+							nisi ut aliquid ex ea commodi consequatur? Quis autem
+							vel eum iure reprehenderit qui in ea voluptate velit
+							esse quam nihil molestiae consequatur, vel illum qui
+							dolorem eum fugiat quo voluptas nulla pariatur.
+							<i>" Quis autem vel eum iure reprehenderit qui in ea voluptate velit
+								esse quam nihil molestiae consequatur.</i></p>
+					</div>
+			</div>
+		</div>
+	</div>
+<!-- //bootstrap-modal-pop-up -->
+<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+<script src="static/js/jquery-2.2.3.min.js"></script>
+
+<!-- skills -->
+
+						<script src="static/js/responsiveslides.min.js"></script>
+			<script>
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider4").responsiveSlides({
+							auto: true,
+							pager:true,
+							nav:false,
+							speed: 500,
+							namespace: "callbacks",
+							before: function () {
+							  $('.events').append("<li>before event fired.</li>");
+							},
+							after: function () {
+							  $('.events').append("<li>after event fired.</li>");
+							}
+						  });
+
+						});
+			</script>
+			<script>
+								// You can also use "$(window).load(function() {"
+								$(function () {
+								  // Slideshow 4
+								  $("#slider3").responsiveSlides({
+									auto: true,
+									pager:false,
+									nav:true,
+									speed: 500,
+									namespace: "callbacks",
+									before: function () {
+									  $('.events').append("<li>before event fired.</li>");
+									},
+									after: function () {
+									  $('.events').append("<li>after event fired.</li>");
+									}
+								  });
+
+								});
+							 </script>
+
+<!-- start-smoth-scrolling -->
+<!-- OnScroll-Number-Increase-JavaScript -->
+	<script type="text/javascript" src="static/js/numscroller-1.0.js"></script>
+<!-- //OnScroll-Number-Increase-JavaScript -->
+<!--flexiselDemo1 -->
+ <script type="text/javascript">
+							$(window).load(function() {
+								$("#flexiselDemo1").flexisel({
+									visibleItems: 2,
+									animationSpeed: 1000,
+									autoPlay: true,
+									autoPlaySpeed: 3000,
+									pauseOnHover: true,
+									enableResponsiveBreakpoints: true,
+									responsiveBreakpoints: {
+										portrait: {
+											changePoint:480,
+											visibleItems: 1
+										},
+										landscape: {
+											changePoint:640,
+											visibleItems: 1
+										},
+										tablet: {
+											changePoint:991,
+											visibleItems: 1
+										}
+									}
+								});
+
+							});
+			</script>
+			<script type="text/javascript" src="static/js/jquery.flexisel.js"></script>
+<!--//flexiselDemo1 -->
+
+<script type="text/javascript" src="static/js/move-top.js"></script>
+<script type="text/javascript" src="static/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+	<script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+
+			$().UItoTop({ easingType: 'easeOutQuart' });
+
+			});
+	</script>
+
+</body>
+</html>
